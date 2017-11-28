@@ -15,7 +15,14 @@ use Illuminate\Database\Capsule\Manager;
  */
 class Database extends Manager
 {
-    protected static $instance = null;
+    /**
+     * @var null
+     */
+    private static $databaseInstance = null;
+
+    /**
+     * @var array
+     */
     private static $config = array();
 
     /**
@@ -45,9 +52,9 @@ class Database extends Manager
      */
     public static function instance()
     {
-        if (empty(self::$instance)) {
-            self::$instance = new static(self::$config);
+        if (empty(self::$databaseInstance)) {
+            self::$databaseInstance = new static(self::$config);
         }
-        return self::$instance;
+        return self::$databaseInstance;
     }
 }
